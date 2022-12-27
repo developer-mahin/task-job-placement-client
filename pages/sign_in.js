@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaGoogle } from 'react-icons/fa';
 import signInLottie from "../assets/72874-user-profile-v2.json";
@@ -9,8 +9,8 @@ import { AuthContext } from "../context/AuthProvider";
 
 
 const Sign_in = () => {
-
-    const { googleSignIn } = useContext(AuthContext)
+    const { signInWithEmailPassword, googleSignIn } = useContext(AuthContext)
+    const [disable, setDisable] = useState(false)
 
     const googleHandler = () => {
         googleSignIn()
@@ -23,13 +23,31 @@ const Sign_in = () => {
             })
     }
 
+    const handleSignIn = (event) => {
+        event.preventDefault()
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signInWithEmailPassword(email, password)
+            .then(result => {
+                const user = result.user;
+                toast.success("User successfully log in")
+                form.reset()
+            })
+            .catch(err => {
+                toast.error(err.message)
+            })
+    }
+
+
     return (
         <div className="lg:w-[1000px] w-full mx-auto grid lg:grid-cols-2 grid-cols-1 items-center gap-6 px-3">
             <div>
                 <Lottie className="w-full" animationData={signInLottie} loop={true} />
             </div>
             <div>
-                <form>
+                <form onSubmit={handleSignIn}>
                     <h2 className="text-center text-2xl pb-9 font-semibold">Sign In</h2>
                     <div className="mb-6">
                         <label
@@ -63,14 +81,22 @@ const Sign_in = () => {
                             required
                         />
                     </div>
-                    <div className="flex items-start mb-6">
+                    <div
+                        className="flex items-start mb-6">
                         <div className="flex items-center h-5">
                             <input
+                                onClick={() => setDisable(!disable)}
                                 id="remember" type="checkbox" value="" className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300" required />
                         </div>
                         <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900">Remember me</label>
                     </div>
-                    <button type="submit" className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Sign In</button>
+                    <button
+                        disabled={!disable}
+                        type="submit"
+                        className={`${!disable ? "font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-cyan-200" : "text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"}`}
+                    >
+                        Sign In
+                    </button>
                 </form>
                 <div>
                     <div className="flex flex-col w-full border-opacity-50">
@@ -87,8 +113,9 @@ const Sign_in = () => {
                         </div>
                         <button
                             onClick={googleHandler}
-                            className="flex justify-center items-center gap-2 bg-cyan-500 border-cyan-500 border-2 hover:bg-white hover:text-cyan-500 py-2 rounded-full text-white">
-                            <FaGoogle className=""></FaGoogle>
+                            className="flex justify-center items-center gap-2 bg-cyan-500 border-cyan-500 border-2 hover:bg-white hover:text-cyan-500 py-2 rounded-full text-white"
+                        >
+                            <FaGoogle></FaGoogle>
                             <span className="font-medium">Sign up with Google</span>
                         </button>
                     </div>

@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 const Sign_up = () => {
 
-    const { googleSignIn } = useContext(AuthContext)
+    const { createAccount,updateUserProfile, googleSignIn } = useContext(AuthContext)
 
     const googleHandler = () => {
         googleSignIn()
@@ -21,25 +21,53 @@ const Sign_up = () => {
             })
     }
 
+    const handleSignUp = (event) => {
+        event.preventDefault()
+        const form = event.target;
+        const first_name = form.first_name.value;
+        const last_name = form.last_name.value;
+        const image = form.file
+        const email = form.email.value;
+        const password = form.password.value;
+
+       console.log(image);
+        
+        const formData = new FormData()
+        formData.append("image", image)
+
+        // console.log(formData)
+
+        // createAccount(email, password)
+        //     .then((result) => {
+        //         const user = result.user
+        //         // updateUserProfile()
+        //         toast.success("Account created successfully")
+        //         form.reset()
+        //     })
+        //     .catch(err => {
+        //         toast.error(err.message)
+        //     })
+    }
+
     return (
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 items-center lg:w-[1000px] w-full mx-auto px-3">
             <Lottie animationData={signUpLottie}></Lottie>
 
             <div>
-                <form>
+                <form onSubmit={handleSignUp}>
                     <h2 className="text-center text-2xl pb-9 font-semibold">Create An Account</h2>
                     <div className="grid md:grid-cols-2 md:gap-6">
                         <div className="relative z-0 mb-6 w-full group">
                             <input
                                 type="text"
-                                name="floating_first_name"
-                                id="floating_first_name"
-                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                name="first_name"
+                                id="first_name"
+                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 focus:bg-transparent peer"
                                 placeholder=" "
                                 required
                             />
                             <label
-                                htmlFor="floating_first_name"
+                                htmlFor="first_name"
                                 className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 First name
@@ -48,14 +76,14 @@ const Sign_up = () => {
                         <div className="relative z-0 mb-6 w-full group">
                             <input
                                 type="text"
-                                name="floating_last_name"
-                                id="floating_last_name"
+                                name="last_name"
+                                id="last_name"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
                                 required
                             />
                             <label
-                                htmlFor="floating_last_name"
+                                htmlFor="last_name"
                                 className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                             >
                                 Last name
@@ -75,14 +103,14 @@ const Sign_up = () => {
 
                         <input
                             type="email"
-                            name="floating_email"
-                            id="floating_email"
+                            name="email"
+                            id="email"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
                             required
                         />
                         <label
-                            htmlFor="floating_email"
+                            htmlFor="email"
                             className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Email address
@@ -91,14 +119,14 @@ const Sign_up = () => {
                     <div className="relative z-0 mb-6 w-full group">
                         <input
                             type="password"
-                            name="floating_password"
-                            id="floating_password"
+                            name="password"
+                            id="password"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
                             required
                         />
                         <label
-                            htmlFor="floating_password"
+                            htmlFor="password"
                             className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                             Password
@@ -124,7 +152,7 @@ const Sign_up = () => {
                             className="flex justify-center items-center gap-2 bg-cyan-500 border-cyan-500 border-2 hover:bg-white hover:text-cyan-500 py-2 rounded-full text-white">
                             <FaGoogle className=""></FaGoogle>
                             <span className="font-medium">Sign up with Google</span>
-                            
+
                         </button>
                     </div>
                 </div>
