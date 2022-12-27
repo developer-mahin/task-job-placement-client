@@ -1,7 +1,7 @@
-import Lottie from "lottie-react"
-import signInLottie from "../assets/72874-user-profile-v2.json"
+import Lottie from "lottie-react";
 import Link from "next/link";
 import { FaGoogle } from 'react-icons/fa';
+import signInLottie from "../assets/72874-user-profile-v2.json";
 
 
 
@@ -16,7 +16,7 @@ const Sign_in = () => {
                     <h2 className="text-center text-2xl pb-9 font-semibold">Sign In</h2>
                     <div className="mb-6">
                         <label
-                            for="email"
+                            htmlFor="email"
                             className="block mb-2 text-sm font-medium text-gray-900"
                         >
                             Your email
@@ -32,7 +32,7 @@ const Sign_in = () => {
                     </div>
                     <div className="mb-6">
                         <label
-                            for="password"
+                            htmlFor="password"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
                             Your password
@@ -51,7 +51,7 @@ const Sign_in = () => {
                             <input
                                 id="remember" type="checkbox" value="" className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300" required />
                         </div>
-                        <label for="remember" className="ml-2 text-sm font-medium text-gray-900">Remember me</label>
+                        <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900">Remember me</label>
                     </div>
                     <button type="submit" className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Sign In</button>
                 </form>
