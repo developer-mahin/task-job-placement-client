@@ -1,11 +1,28 @@
 import Lottie from "lottie-react";
 import Link from "next/link";
+import { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import signUpLottie from "../assets/38435-register.json";
+import { AuthContext } from "../context/AuthProvider";
 
 const Sign_up = () => {
+
+    const { googleSignIn } = useContext(AuthContext)
+
+    const googleHandler = () => {
+        googleSignIn()
+            .then((result) => {
+                const user = result.user
+                toast.success("Successfully sign in with google")
+            })
+            .catch(err => {
+                toast.error(err.message)
+            })
+    }
+
     return (
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 items-center container mx-auto px-3">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 items-center lg:w-[1000px] w-full mx-auto px-3">
             <Lottie animationData={signUpLottie}></Lottie>
 
             <div>
@@ -102,9 +119,12 @@ const Sign_up = () => {
                                 </Link>{" "}
                             </p>
                         </div>
-                        <button className="flex justify-center items-center gap-2 bg-cyan-500 border-cyan-500 border-2 hover:bg-white hover:text-cyan-500 py-2 rounded-full text-white">
+                        <button
+                            onClick={googleHandler}
+                            className="flex justify-center items-center gap-2 bg-cyan-500 border-cyan-500 border-2 hover:bg-white hover:text-cyan-500 py-2 rounded-full text-white">
                             <FaGoogle className=""></FaGoogle>
                             <span className="font-medium">Sign up with Google</span>
+                            
                         </button>
                     </div>
                 </div>

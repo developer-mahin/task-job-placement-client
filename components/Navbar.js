@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { AuthContext } from "../context/AuthProvider";
 
@@ -7,8 +8,17 @@ import { AuthContext } from "../context/AuthProvider";
 const Navbar = () => {
 
     const [open, setOpen] = useState(false)
-    const {user} = useContext(AuthContext)
-    // console.log(user);
+    const { user ,signOutMethod} = useContext(AuthContext)
+
+    const signOutHandler = () =>{
+        signOutMethod()
+        .then(()=>{
+            toast.success("successfully sign out ")
+        })
+        .catch((err)=>{
+            toast.error(err.message)
+        })
+    }
 
     return (
         <div className='container mx-auto'>
@@ -48,18 +58,31 @@ const Navbar = () => {
                     </li>
 
 
-                    <li>
-                        <Link
-                            onClick={() => setOpen(!open)}
-                            href="/sign_in" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
-                        >Sign In</Link>
-                    </li>
-                    <li>
-                        <Link
-                            onClick={() => setOpen(!open)}
-                            href="/sign_up" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium" : "text-center"}`} aria-current="page"
-                        >Sign Up</Link>
-                    </li>
+                    {
+                        user?.uid ? <>
+                            <li>
+                                <button
+                                onClick={signOutHandler}
+                                    className="bg-cyan-400 px-6 py-2 border-2 border-cyan-400 rounded-full hover:bg-transparent hover:text-cyan-600 hover:font-medium"
+                                >Sign out</button>
+                            </li>
+                        </> : <>
+
+                            <li>
+                                <Link
+                                    onClick={() => setOpen(!open)}
+                                    href="/sign_in" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
+                                >Sign In</Link>
+                            </li>
+                            <li>
+                                <Link
+                                    onClick={() => setOpen(!open)}
+                                    href="/sign_up" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium" : "text-center"}`} aria-current="page"
+                                >Sign Up</Link>
+                            </li>
+
+                        </>
+                    }
 
                 </ul>
                 <div className='md:hidden md:pr-0 pr-3'>
