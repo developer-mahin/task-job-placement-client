@@ -1,8 +1,62 @@
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { useContext, useState } from "react";
+import BigSpinner from "../components/BigSpinner";
+import SingleTask from "../components/SingleTask";
+import { AuthContext } from "../context/AuthProvider";
+
 const My_tasks = () => {
+    const { user } = useContext(AuthContext)
+    const [loading, setLoading] = useState(false)
+
+    const { data: allMyTasks = [] } = useQuery({
+        queryKey: ["allMyTasks", user?.email],
+        queryFn: async () => {
+            setLoading(true)
+            const res = await fetch(`http://localhost:5000/my_tasks?email=${user?.email}`)
+            const data = await res.json()
+            setLoading(false)
+            return data
+        }
+
+    })
+
     return (
-        <div>
-            <h2>hello from my tasks</h2>
-        </div>
+        <>
+
+            {
+                loading ? <BigSpinner></BigSpinner> : <>
+
+                    {
+                        !allMyTasks.length ? <>
+                            <h2 className="text-center text-3xl font-medium">
+                                You do not add any task
+                                <Link
+                                    href="/add_tasks"
+                                    className="text-blue-500 hover:underline ml-2">
+                                    please add tasks
+                                </Link>
+                            </h2>
+                        </> : <>
+
+                            <div className="lg:w-[900px] w-full mx-auto px-3">
+                                {
+                                    allMyTasks.map(task => <SingleTask
+
+                                        key={task._id}
+                                        task={task}
+
+                                    ></SingleTask>)
+                                }
+                            </div>
+
+                        </>
+                    }
+
+                </>
+            }
+
+        </>
     );
 };
 

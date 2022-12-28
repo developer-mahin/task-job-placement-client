@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import SmallSpinner from "../components/SmallSpinner";
+import { AuthContext } from "../context/AuthProvider";
 
 const Add_tasks = () => {
     const [loading, setLoading] = useState(false)
+    const {user} = useContext(AuthContext)
 
     const addTaskHandler = (event) => {
         setLoading(true)
@@ -26,7 +28,8 @@ const Add_tasks = () => {
                 const tasksInfo = {
                     title,
                     description,
-                    image: data.data.display_url
+                    image: data.data.display_url,
+                    email: user?.email
                 }
                 fetch("http://localhost:5000/add_tasks", {
                     method: "POST",
@@ -38,6 +41,7 @@ const Add_tasks = () => {
                     .then(res => res.json())
                     .then(data => {
                         toast.success("task successfully added")
+                        form.reset()
                         setLoading(false)
                     })
                     .catch(err => {
