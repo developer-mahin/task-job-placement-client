@@ -8,16 +8,16 @@ import { AuthContext } from "../context/AuthProvider";
 const Navbar = () => {
 
     const [open, setOpen] = useState(false)
-    const { user ,signOutMethod} = useContext(AuthContext)
+    const { user, signOutMethod } = useContext(AuthContext)
 
-    const signOutHandler = () =>{
+    const signOutHandler = () => {
         signOutMethod()
-        .then(()=>{
-            toast.success("successfully sign out ")
-        })
-        .catch((err)=>{
-            toast.error(err.message)
-        })
+            .then(() => {
+                toast.success("successfully sign out ")
+            })
+            .catch((err) => {
+                toast.error(err.message)
+            })
     }
 
     return (
@@ -31,21 +31,21 @@ const Navbar = () => {
                     <li>
                         <Link
                             onClick={() => setOpen(!open)}
-                            href="/" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
+                            href="/" className={`block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
                         >Home</Link>
                     </li>
 
                     <li>
                         <Link
                             onClick={() => setOpen(!open)}
-                            href="/add_tasks" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
+                            href="/add_tasks" className={`block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
                         >Add Tasks</Link>
                     </li>
 
                     <li>
                         <Link
                             onClick={() => setOpen(!open)}
-                            href="/my_tasks" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
+                            href="/my_tasks" className={`block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
                         >My Tasks</Link>
                     </li>
 
@@ -53,7 +53,7 @@ const Navbar = () => {
                     <li>
                         <Link
                             onClick={() => setOpen(!open)}
-                            href="/complete_tasks" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
+                            href="/complete_tasks" className={`block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
                         >Complete Tasks</Link>
                     </li>
 
@@ -62,7 +62,7 @@ const Navbar = () => {
                         user?.uid ? <>
                             <li>
                                 <button
-                                onClick={signOutHandler}
+                                    onClick={signOutHandler}
                                     className="bg-cyan-400 px-6 py-2 border-2 border-cyan-400 rounded-full hover:bg-transparent hover:text-cyan-600 hover:font-medium"
                                 >Sign out</button>
                             </li>
@@ -71,18 +71,28 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     onClick={() => setOpen(!open)}
-                                    href="/sign_in" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
+                                    href="/sign_in" className={`block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium border-0 border-b-2 border-gray-300" : "text-center"}`} aria-current="page"
                                 >Sign In</Link>
                             </li>
                             <li>
                                 <Link
                                     onClick={() => setOpen(!open)}
-                                    href="/sign_up" className={`block py-2 px-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium" : "text-center"}`} aria-current="page"
+                                    href="/sign_up" className={`block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" ${open ? "text-left font-medium" : "text-center"}`} aria-current="page"
                                 >Sign Up</Link>
                             </li>
 
                         </>
                     }
+                    <li>
+                        <img
+                            onClick={() => setOpen(!open)}
+                            className="w-10 h-10 cursor-pointer rounded-full"
+                            src={user?.uid ? `${user?.photoURL}` : "https://png.pngtree.com/png-vector/20220817/ourmid/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png"
+                            }
+                            title={user?.displayName}
+                            alt=""
+                        />
+                    </li>
 
                 </ul>
                 <div className='md:hidden md:pr-0 pr-3'>
