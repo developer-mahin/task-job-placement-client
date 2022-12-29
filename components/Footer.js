@@ -4,14 +4,13 @@ const Footer = () => {
     return (
 
         <footer className="lg:pt-16 pt-0 bg-white sm:p-6 container mx-auto px-3">
-            <div className="md:flex md:justify-between">
+            <div className="grid lg:grid-cols-5 grid-cols-1">
                 <div className="mb-6 md:mb-0">
                     <Link href="/" className="flex items-center">
-                        <img src="" className="mr-3 h-8" alt="FlowBite Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" className="mr-3 lg:w-1/2 w-full" alt="FlowBite Logo" />
                     </Link>
                 </div>
-                <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                <div className="grid col-span-3 grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 justify-between">
                     <div>
                         <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Resources</h2>
                         <ul className="text-gray-600">

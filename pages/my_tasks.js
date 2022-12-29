@@ -9,7 +9,7 @@ const My_tasks = () => {
     const { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(false)
 
-    const { data: allMyTasks = [] } = useQuery({
+    const { data: allMyTasks = [], refetch } = useQuery({
         queryKey: ["allMyTasks", user?.email],
         queryFn: async () => {
             setLoading(true)
@@ -29,7 +29,7 @@ const My_tasks = () => {
 
                     {
                         !allMyTasks.length ? <>
-                            <h2 className="text-center text-3xl font-medium">
+                            <h2 className="text-center text-3xl font-medium lg:py-56 py-6">
                                 You do not add any task
                                 <Link
                                     href="/add_tasks"
@@ -45,7 +45,7 @@ const My_tasks = () => {
 
                                         key={task._id}
                                         task={task}
-
+                                        refetch={refetch}
                                     ></SingleTask>)
                                 }
                             </div>

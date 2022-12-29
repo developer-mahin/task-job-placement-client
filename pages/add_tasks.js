@@ -29,7 +29,8 @@ const Add_tasks = () => {
                     title,
                     description,
                     image: data.data.display_url,
-                    email: user?.email
+                    email: user?.email,
+                    task_status: "started",
                 }
                 fetch("http://localhost:5000/add_tasks", {
                     method: "POST",
