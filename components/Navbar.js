@@ -98,12 +98,15 @@ const Navbar = () => {
                     </li>
                     <li>
                         <div>
-                            { 
-                                theme === "light" ? <BsSun 
-                                onClick={()=>toggleTheme(theme)}
-                                className="text-2xl mt-[7px] cursor-pointer"></BsSun> : <BsMoonStarsFill 
-                                onClick={()=>toggleTheme(theme)}
-                                className="text-2xl mt-[7px] cursor-pointer"></BsMoonStarsFill>
+                            {
+                                theme === "light" ? <BsMoonStarsFill
+                                    onClick={() => toggleTheme(theme)}
+                                    className="text-2xl mt-[7px] cursor-pointer"></BsMoonStarsFill> :
+                                    <BsSun
+                                        onClick={() => toggleTheme(theme)}
+                                        className="text-2xl mt-[7px] cursor-pointer">
+                                    </BsSun>
+
                             }
                         </div>
                     </li>

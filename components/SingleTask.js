@@ -20,7 +20,7 @@ const SingleTask = ({ task, refetch }) => {
 
     const completeHandler = (id) => {
         setLoading(true)
-        fetch(`http://localhost:5000/completed_task/${id}`, {
+        fetch(`https://task-projects-server.vercel.app/completed_task/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
@@ -43,7 +43,7 @@ const SingleTask = ({ task, refetch }) => {
 
     const handleDelete = (id) => {
         setLoading(true)
-        fetch(`http://localhost:5000/delete_task/${id}`, {
+        fetch(`https://task-projects-server.vercel.app/delete_task/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
@@ -64,7 +64,7 @@ const SingleTask = ({ task, refetch }) => {
 
     const updateHandler = (id) => {
         setLoading(true)
-        fetch(`http://localhost:5000/update_task/${id}`, {
+        fetch(`https://task-projects-server.vercel.app/update_task/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

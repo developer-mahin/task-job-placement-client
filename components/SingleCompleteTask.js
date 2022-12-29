@@ -8,7 +8,7 @@ const SingleCompleteTask = ({ task, refetch }) => {
 
     const handleDelete = (id) => {
         setLoading(true)
-        fetch(`http://localhost:5000/delete_task/${id}`, {
+        fetch(`https://task-projects-server.vercel.app/delete_task/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"

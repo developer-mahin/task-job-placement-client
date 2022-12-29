@@ -9,11 +9,11 @@ const Completed_tasks = () => {
     const { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(false)
 
-    const { data: completedTasks = [] , refetch} = useQuery({
+    const { data: completedTasks = [], refetch } = useQuery({
         queryKey: ["completedTasks", user?.email],
         queryFn: async () => {
             setLoading(true)
-            const res = await fetch(`http://localhost:5000/my_completed_task?task_status="completed"&email=${user?.email}`)
+            const res = await fetch(`https://task-projects-server.vercel.app/my_completed_task?task_status="completed"&email=${user?.email}`)
             const data = await res.json()
             setLoading(false)
             return data

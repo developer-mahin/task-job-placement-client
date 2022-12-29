@@ -13,7 +13,7 @@ const My_tasks = () => {
         queryKey: ["allMyTasks", user?.email],
         queryFn: async () => {
             setLoading(true)
-            const res = await fetch(`http://localhost:5000/my_tasks?email=${user?.email}`)
+            const res = await fetch(`https://task-projects-server.vercel.app/my_tasks?email=${user?.email}`)
             const data = await res.json()
             setLoading(false)
             return data

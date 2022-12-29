@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 const Add_tasks = () => {
     const [loading, setLoading] = useState(false)
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const addTaskHandler = (event) => {
         setLoading(true)
@@ -32,7 +32,7 @@ const Add_tasks = () => {
                     email: user?.email,
                     task_status: "started",
                 }
-                fetch("http://localhost:5000/add_tasks", {
+                fetch("https://task-projects-server.vercel.app/add_tasks", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"

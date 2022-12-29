@@ -96,7 +96,7 @@ const Sign_up = () => {
             verify: false
         }
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://task-projects-server.vercel.app/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -110,7 +110,7 @@ const Sign_up = () => {
     }
 
     const verifyJWT = (email) => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
+        fetch(`https://task-projects-server.vercel.app/jwt?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem("access-token", data.access_token)

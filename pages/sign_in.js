@@ -1,5 +1,4 @@
 import Lottie from "lottie-react";
-import { TEMPORARY_REDIRECT_STATUS } from "next/dist/shared/lib/constants";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -62,7 +61,7 @@ const Sign_in = () => {
             verify: false
         }
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://task-projects-server.vercel.app/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -76,7 +75,7 @@ const Sign_in = () => {
     }
 
     const verifyJWT = (email) => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
+        fetch(`https://task-projects-server.vercel.app/jwt?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem("access-token", data.access_token)
