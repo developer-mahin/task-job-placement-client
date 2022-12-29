@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -15,4 +14,41 @@ body {
   overflow-x: hidden;
 }
 
+.dark {
+  background-color: #122033 !important;
+  color: white;
+}
 
+.dark a {
+  color: white;
+}
+
+.dark h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: white;
+}
+
+.dark label {
+  color: white;
+}
+
+.dark a:hover {
+  color: rgb(158, 158, 158);
+}
+
+.dark input {
+  background-color: transparent;
+  color: white;
+}
+.dark textarea {
+  background-color: transparent;
+  color: white;
+}
+
+.dark .banner {
+  background: linear-gradient(45deg, black, transparent);
+}

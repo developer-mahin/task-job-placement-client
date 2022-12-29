@@ -3,13 +3,16 @@ import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { AuthContext } from "../context/AuthProvider";
-import ToggleButton from "./ToggleButton";
+import { BsMoonStarsFill, BsSun } from 'react-icons/Bs';
+import { ThemeContext } from "../pages/_app";
 
 
 const Navbar = () => {
 
     const [open, setOpen] = useState(false)
     const { user, signOutMethod } = useContext(AuthContext)
+    const { theme, toggleTheme } = useContext(ThemeContext)
+
 
     const signOutHandler = () => {
         signOutMethod()
@@ -22,7 +25,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto' id={theme}>
             <nav className='md:container mx-auto flex justify-between items-center relative bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900'>
                 <Link href='/' className='flex items-center gap-1'>
                     <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" className="w-10" alt="" />
@@ -95,7 +98,13 @@ const Navbar = () => {
                     </li>
                     <li>
                         <div>
-                            <ToggleButton></ToggleButton>
+                            { 
+                                theme === "light" ? <BsSun 
+                                onClick={()=>toggleTheme(theme)}
+                                className="text-2xl mt-[7px] cursor-pointer"></BsSun> : <BsMoonStarsFill 
+                                onClick={()=>toggleTheme(theme)}
+                                className="text-2xl mt-[7px] cursor-pointer"></BsMoonStarsFill>
+                            }
                         </div>
                     </li>
 
