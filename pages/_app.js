@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }) {
 
   const toggleTheme = () => {
     setTheme((current) => (current === "light" ? "dark" : "light"))
+    localStorage.setItem("theme", theme)
   }
 
   const themeInfo = {

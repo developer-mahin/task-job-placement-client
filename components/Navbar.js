@@ -100,10 +100,10 @@ const Navbar = () => {
                         <div>
                             {
                                 theme === "light" ? <BsMoonStarsFill
-                                    onClick={() => toggleTheme(theme)}
+                                    onClick={() => toggleTheme(localStorage.getItem("theme"))}
                                     className="text-2xl mt-[7px] cursor-pointer"></BsMoonStarsFill> :
                                     <BsSun
-                                        onClick={() => toggleTheme(theme)}
+                                        onClick={() => toggleTheme(localStorage.getItem("theme"))}
                                         className="text-2xl mt-[7px] cursor-pointer">
                                     </BsSun>
 
