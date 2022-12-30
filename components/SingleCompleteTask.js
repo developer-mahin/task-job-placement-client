@@ -61,7 +61,7 @@ const SingleCompleteTask = ({ task, refetch }) => {
                 <img className='w-full h-1/2 ' src={image} alt="" />
             </div>
             <div className='col-span-3'>
-                <h2 className='text-4xl font-bold'>{title}</h2>
+                <h2 className='text-4xl font-bold py-2'>{title}</h2>
                 <p>{description}</p>
                 <small className='capitalize text-green-400 font-semibold py-2 text-xl'>Task {task_status}</small>
                 {
