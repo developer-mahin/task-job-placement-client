@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import SmallSpinner from './SmallSpinner';
@@ -9,7 +8,6 @@ const SingleCompleteTask = ({ task, refetch }) => {
     const [loading, setLoading] = useState(false)
     const [addComment, setAddComment] = useState("")
     const [commentLoading, setCommentLoading] = useState(false)
-    const router = useRouter()
 
     const handleDelete = (id) => {
         setLoading(true)
@@ -74,7 +72,6 @@ const SingleCompleteTask = ({ task, refetch }) => {
                     <br />
                     <button
                         onClick={() => commentHandler(_id)}
-                        // disabled={comment.length}
                         className="px-4 py-1.5 font-medium border-2 hover:-translate-y-2 transition-all border-green-400 rounded text-green-400 capitalize"
                     >
                         {
