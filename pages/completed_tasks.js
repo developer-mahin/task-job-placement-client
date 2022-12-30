@@ -29,7 +29,7 @@ const Completed_tasks = () => {
                 loading ? <BigSpinner></BigSpinner> : <>
                     {
                         !completedTasks.length ? <>
-                            <h2 className="text-3xl text-center lg:py-56 py-6">You do not complete any task</h2>
+                            <h2 className="text-3xl text-center lg:py-56 py-6 text-gray-600">You do not complete any task</h2>
                         </> : <>
                             {
                                 completedTasks.map(task => <SingleCompleteTask

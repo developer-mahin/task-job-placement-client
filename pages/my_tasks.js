@@ -29,7 +29,7 @@ const My_tasks = () => {
 
                     {
                         !allMyTasks.length ? <>
-                            <h2 className="text-center text-3xl font-medium lg:py-56 py-6">
+                            <h2 className="text-center text-3xl font-medium lg:py-56 py-6 text-gray-600">
                                 You do not add any task
                                 <Link
                                     href="/add_tasks"

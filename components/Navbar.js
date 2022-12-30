@@ -29,6 +29,7 @@ const Navbar = () => {
             <nav className='md:container mx-auto flex justify-between items-center relative bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900'>
                 <Link href='/' className='flex items-center gap-1'>
                     <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" className="w-10" alt="" />
+                    <span className="text-xl font-semibold">UniQue</span>
                 </Link>
                 <ul className={`md:bg-transparent md:flex md:justify-end md:static absolute w-full text-center z-10 flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white" ${open ? 'top-10 ' : 'top-[-290px]'}`}>
                     <li>
