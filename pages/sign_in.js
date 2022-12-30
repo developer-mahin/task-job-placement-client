@@ -1,5 +1,6 @@
 import Lottie from "lottie-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaGoogle } from 'react-icons/fa';
@@ -13,6 +14,7 @@ const Sign_in = () => {
     const { signInWithEmailPassword, googleSignIn } = useContext(AuthContext)
     const [disable, setDisable] = useState(true)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const googleHandler = () => {
         googleSignIn()
@@ -23,6 +25,7 @@ const Sign_in = () => {
                     user?.email,
                     user?.photoURL
                 )
+                router.push("/")
                 toast.success("Successfully sign in with google")
             })
             .catch(err => {
@@ -43,6 +46,7 @@ const Sign_in = () => {
                 toast.success("User successfully log in")
                 verifyJWT(email)
                 form.reset()
+                router.push("/")
                 setLoading(false)
             })
             .catch(err => {

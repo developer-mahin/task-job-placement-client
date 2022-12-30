@@ -20,7 +20,7 @@ const Completed_tasks = () => {
         }
     })
 
-
+  
 
 
     return (

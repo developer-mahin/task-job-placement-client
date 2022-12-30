@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import SmallSpinner from './SmallSpinner';
@@ -7,6 +9,7 @@ const SingleCompleteTask = ({ task, refetch }) => {
     const [loading, setLoading] = useState(false)
     const [addComment, setAddComment] = useState("")
     const [commentLoading, setCommentLoading] = useState(false)
+    const router = useRouter()
 
     const handleDelete = (id) => {
         setLoading(true)
@@ -64,15 +67,15 @@ const SingleCompleteTask = ({ task, refetch }) => {
                 {
                     comment ? <p className='py-2 text-xl capitalize'>Comment: {comment}</p> : <></>
                 }
-                <div className='py-3'>
+                <div className='py-4'>
                     <textarea
                         onBlur={(e) => setAddComment(e.target.value)}
-                        name="" className='w-1/2 rounded-lg h-16'></textarea>
+                        name="" className='w-1/2 rounded-lg h-16 mb-4'></textarea>
                     <br />
                     <button
                         onClick={() => commentHandler(_id)}
                         // disabled={comment.length}
-                        className={`${comment.length ? "text-green-300 border-green-200 border-2 rounded px-4 py-1.5" : "px-4 py-1.5 font-medium border-2 hover:-translate-y-2 transition-all border-green-400 rounded text-green-400 capitalize"} `}
+                        className="px-4 py-1.5 font-medium border-2 hover:-translate-y-2 transition-all border-green-400 rounded text-green-400 capitalize"
                     >
                         {
                             commentLoading ? <SmallSpinner></SmallSpinner> : "Comment"
@@ -89,6 +92,13 @@ const SingleCompleteTask = ({ task, refetch }) => {
                         }
 
                     </button>
+                    <Link
+                        href="/my_tasks"
+                        className='px-4 py-1.5 font-medium border-2 hover:-translate-y-2 transition-all border-green-400 rounded text-green-400 capitalize'
+                    >
+                        Not Completed
+
+                    </Link>
                 </div>
             </div>
 

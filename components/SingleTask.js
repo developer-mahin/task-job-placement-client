@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import Modal from './Modal';
@@ -6,7 +8,9 @@ import SmallSpinner from './SmallSpinner';
 const SingleTask = ({ task, refetch }) => {
     const { image, title, description, _id, task_status } = task;
     const [loading, setLoading] = useState(false)
+    const [completeLoading, setCompleteLoading] = useState(false)
     const [updateTask, setUpdateTask] = useState("")
+    const router = useRouter()
 
     let [isOpen, setIsOpen] = useState(false)
 
@@ -19,7 +23,7 @@ const SingleTask = ({ task, refetch }) => {
     }
 
     const completeHandler = (id) => {
-        setLoading(true)
+        setCompleteLoading(true)
         fetch(`https://task-projects-server.vercel.app/completed_task/${id}`, {
             method: "PATCH",
             headers: {
@@ -30,7 +34,8 @@ const SingleTask = ({ task, refetch }) => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     toast.success("Task complete successfully")
-                    setLoading(false)
+                    setCompleteLoading(false)
+                    router.push("/completed_tasks")
                     refetch()
                 }
             })
@@ -119,7 +124,7 @@ const SingleTask = ({ task, refetch }) => {
                         className={`${task_status === "completed" ? "text-green-300 border-green-200 border-2 rounded px-4 py-1.5" : "px-4 py-1.5 font-medium border-2 hover:-translate-y-2 transition-all border-green-400 rounded text-green-400 capitalize"} `}
                     >
                         {
-                            loading ? <SmallSpinner></SmallSpinner> : "Complete"
+                            completeLoading ? <SmallSpinner></SmallSpinner> : "Complete"
                         }
 
                     </button>

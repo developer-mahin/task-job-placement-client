@@ -1,5 +1,6 @@
 import Lottie from "lottie-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
@@ -12,6 +13,8 @@ const Sign_up = () => {
     const { createAccount, updateUserProfile, googleSignIn } = useContext(AuthContext)
     const [loading, setLoading] = useState(false)
     const [disable, setDisable] = useState(true)
+    const router = useRouter()
+
 
     const googleHandler = () => {
         googleSignIn()
@@ -76,6 +79,7 @@ const Sign_up = () => {
 
                             form.reset()
                             toast.success("Account created successfully")
+                            router.push("/")
                             setLoading(false)
                         })
                         .catch(err => {
