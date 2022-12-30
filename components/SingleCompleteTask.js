@@ -3,9 +3,10 @@ import { toast } from 'react-hot-toast';
 import SmallSpinner from './SmallSpinner';
 
 const SingleCompleteTask = ({ task, refetch }) => {
-    const { image, task_status, description, title, _id } = task
+    const { image, task_status, description, title, _id, comment } = task
     const [loading, setLoading] = useState(false)
-    const [comment, setComment] = useState("")
+    const [addComment, setAddComment] = useState("")
+    const [commentLoading, setCommentLoading] = useState(false)
 
     const handleDelete = (id) => {
         setLoading(true)
@@ -29,24 +30,25 @@ const SingleCompleteTask = ({ task, refetch }) => {
     }
 
     const commentHandler = (id) => {
-        setLoading(true)
+        setCommentLoading(true)
         fetch(`https://task-projects-server.vercel.app/comment/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify({ comment: comment })
+            body: JSON.stringify({ comment: addComment })
         })
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
                     toast.success("successfully add comment")
-                    setLoading(false)
+                    setCommentLoading(false)
+                    refetch()
                 }
             })
             .catch(err => {
                 toast.error(err.message)
-                setLoading(false)
+                setCommentLoading(false)
             })
     }
 
@@ -59,16 +61,21 @@ const SingleCompleteTask = ({ task, refetch }) => {
                 <h2 className='text-4xl font-bold'>{title}</h2>
                 <p>{description}</p>
                 <small className='capitalize text-green-400 font-semibold py-2 text-xl'>Task {task_status}</small>
+                {
+                    comment ? <p className='py-2 text-xl capitalize'>Comment: {comment}</p> : <></>
+                }
                 <div className='py-3'>
                     <textarea
-                        onBlur={(e) => setComment(e.target.value)}
+                        onBlur={(e) => setAddComment(e.target.value)}
                         name="" className='w-1/2 rounded-lg h-16'></textarea>
                     <br />
                     <button
                         onClick={() => commentHandler(_id)}
-                        className='px-4 py-1.5 font-medium border-2 border-green-400 rounded text-green-400 capitalize'>
+                        // disabled={comment.length}
+                        className={`${comment.length ? "text-green-300 border-green-200 border-2 rounded px-4 py-1.5" : "px-4 py-1.5 font-medium border-2 hover:-translate-y-2 transition-all border-green-400 rounded text-green-400 capitalize"} `}
+                    >
                         {
-                            loading ? <SmallSpinner></SmallSpinner> : "Comment"
+                            commentLoading ? <SmallSpinner></SmallSpinner> : "Comment"
                         }
                     </button>
                 </div>
